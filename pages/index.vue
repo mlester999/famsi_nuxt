@@ -1,11 +1,3 @@
-<script setup>
-import { useLandingPageStore } from '@/store/landingPage';
-import { storeToRefs } from 'pinia';
-
-const store = useLandingPageStore();
-const { steps } = storeToRefs(store);
-</script>
-
 <script>
 import aosMixin from '@/mixins/aos';
 export default {
@@ -73,28 +65,6 @@ export default {
 </template>
 
 <style scoped>
-.text-header-gradient {
-  background: rgb(59, 180, 77);
-  background: linear-gradient(
-    169.4deg,
-    #3bb44d -6.01%,
-    #0db865 36.87%,
-    #2ea978 78.04%,
-    #0dbf6f 103.77%
-  );
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.bg-partner {
-  background: url('../assets/img/partner/background.png');
-  background-size: cover;
-  background-position: center;
-}
-.bg-trading-tools {
-  background: url('../assets/img/bg-trading-tools.webp');
-  background-size: cover;
-  background-position: center;
-}
 .max-h-0 {
   max-height: 0;
 }

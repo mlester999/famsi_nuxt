@@ -31,3 +31,18 @@ const { visitOffice } = storeToRefs(store);
     </div>
   </section>
 </template>
+
+<style scoped>
+.text-header-gradient {
+  background: rgb(59, 180, 77);
+  background: linear-gradient(
+    169.4deg,
+    #3bb44d -6.01%,
+    #0db865 36.87%,
+    #2ea978 78.04%,
+    #0dbf6f 103.77%
+  );
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+</style>
