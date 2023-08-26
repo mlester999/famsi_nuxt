@@ -11,5 +11,5 @@
 export default {
   name: 'BaseButton',
   inheritAttrs: false,
-}
+};
 </script>

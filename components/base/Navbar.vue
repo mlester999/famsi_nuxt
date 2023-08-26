@@ -10,7 +10,7 @@
           <div>
             <a href="/">
               <img
-                src="~/assets/img/logo/famsi_logo.png"
+                src="@/assets/img/logo/famsi_logo.png"
                 class="w-24 xl:w-28"
                 alt="FAMSI Logo"
               />
@@ -26,11 +26,13 @@
         </div>
       </div>
       <div :class="[open ? 'flex' : 'hidden lg:flex']" class="space-x-3">
-        <base-button
-          class="px-8 xl:px-10 py-3 mt-2 bg-inherit text-gradient border border-[#0c66ee]"
-        >
-          Login
-        </base-button>
+        <NuxtLink to="/login">
+          <base-button
+            class="px-8 xl:px-10 py-3 mt-2 bg-inherit text-gradient border border-[#0c66ee]"
+          >
+            Login
+          </base-button>
+        </NuxtLink>
         <base-button
           class="px-8 xl:px-10 py-3 mt-2 bg-gradient-to-r from-[#468ef9] to-[#0c66ee] text-white"
         >

@@ -46,13 +46,18 @@ const { welcome } = storeToRefs(store);
           <BaseButton
             class="max-w-full px-8 py-4 bg-gradient-to-r from-[#468ef9] to-[#0c66ee] border border-[#0c66ee] text-white"
           >
-            Get Started
+            <div class="flex items-center gap-2">
+              Get Started
+              <IconBottomArrow size="20" />
+            </div>
           </BaseButton>
           <BaseButton
-            class="max-w-full px-6 py-4 bg-inherit text-gradient border border-[#0c66ee] flex items-center justify-center"
+            class="max-w-full px-6 py-4 bg-inherit text-[#0c66ee] border border-[#0c66ee] flex items-center justify-center"
           >
-            <span>View Openings</span>
-            <ChevronDownIcon :size="20" class="mt-1 text-[#0c66ee]" />
+            <div class="flex items-center gap-1">
+              View Openings
+              <IconRightArrow size="20" />
+            </div>
           </BaseButton>
         </div>
       </div>
@@ -61,7 +66,7 @@ const { welcome } = storeToRefs(store);
           <img
             data-aos="fade-up"
             data-aos-once="true"
-            src="~/assets/img/famsi_poster1.png"
+            src="@/assets/img/famsi_poster1.png"
             class="-mt-4"
             alt=""
           />
