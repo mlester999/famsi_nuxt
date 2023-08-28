@@ -1,3 +1,9 @@
+<script setup>
+definePageMeta({
+  middleware: 'auth',
+});
+</script>
+
 <script>
 import aosMixin from '@/mixins/aos';
 export default {

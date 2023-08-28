@@ -1,26 +1,41 @@
-<script lang="ts" setup>
-import { ref } from 'vue';
+<script setup>
+import { ref, reactive } from 'vue';
+import { useAuthStore } from '@/store/useAuthStore';
+
+const auth = useAuthStore();
+
+console.log(auth.isLoading);
 
 const form = ref({
-  emailAddress: '',
+  email: '',
+  password: '',
+});
+
+const errors = reactive({
+  email: '',
   password: '',
 });
 
 const handleLogin = async () => {
-  await useFetch('http://localhost:8000/sanctum/csrf-cookie', {
-    credentials: 'include',
-  });
+  const { error } = await auth.login(form.value);
 
-  const token = useCookie('XSRF-TOKEN');
+  if (error.value?.data?.error) {
+    if (typeof error.value.data.error !== 'string') {
+      if (error.value.data.error.email) {
+        errors.email = error.value.data.error.email[0];
+      }
 
-  await useFetch('http://localhost:8000/login', {
-    credentials: 'include',
-    method: 'POST',
-    body: form.value,
-    headers: {
-      'X-XSRF-TOKEN': token.value as string,
-    },
-  });
+      if (error.value.data.error.password) {
+        errors.password = error.value.data.error.password[0];
+      }
+    } else {
+      errors.email = error.value.data.error;
+      errors.password = '';
+    }
+  } else {
+    errors.email = '';
+    errors.password = '';
+  }
 };
 </script>
 
@@ -40,29 +55,41 @@ const handleLogin = async () => {
         <h1 class="text-xl font-normal">Login your account.</h1>
       </div>
 
-      <form class="w-full" @submit.prevent="handleLogin">
-        <BaseInputField
-          id="emailAddress"
-          v-model="form.emailAddress"
-          type="text"
-          label="Email Address"
-          placeholder="Email Address"
-        />
+      <form class="w-full py-4 space-y-10" @submit.prevent="handleLogin">
+        <div>
+          <BaseInputField
+            id="email"
+            v-model="form.email"
+            type="text"
+            label="Email Address"
+            placeholder="Email Address"
+            :errors="errors?.email"
+          />
+        </div>
 
-        <BaseInputField
-          id="password"
-          v-model="form.password"
-          type="password"
-          label="Password"
-          placeholder="Password"
-        />
+        <div>
+          <BaseInputField
+            id="password"
+            v-model="form.password"
+            type="password"
+            label="Password"
+            placeholder="Password"
+            :errors="errors?.password"
+          />
+        </div>
 
         <div class="flex flex-col space-y-5 w-full">
           <BaseButton
             type="submit"
-            class="px-8 xl:px-10 py-3 mt-2 bg-gradient-to-r from-[#468ef9] to-[#0c66ee] text-white"
+            :disabled="auth.isLoading"
+            class="px-8 xl:px-10 py-3 mt-2 text-white"
+            :class="[
+              auth.isLoading
+                ? 'bg-gradient-to-r from-[#85a5ff] to-[#4b8dff] hover:shadow-none'
+                : 'bg-gradient-to-r from-[#468ef9] to-[#0c66ee]',
+            ]"
           >
-            Log In
+            {{ auth.isLoading ? 'Loading...' : 'Log In' }}
           </BaseButton>
           <div
             class="flex items-center justify-center border-t-[1px] border-t-slate-300 w-full relative"

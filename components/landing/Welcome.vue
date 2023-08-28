@@ -1,5 +1,5 @@
 <script setup>
-import { useLandingPageStore } from '@/store/landingPage';
+import { useLandingPageStore } from '@/store/useLandingPageStore';
 import { storeToRefs } from 'pinia';
 
 const store = useLandingPageStore();
