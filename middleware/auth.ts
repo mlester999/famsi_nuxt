@@ -6,7 +6,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   await store.fetchUser();
 
   if (store.user) {
-    if (to.path === '/' || to.path === '/login') {
+    if (to.path === '/' || to.path === '/login' || to.path === '/signup') {
       return navigateTo('/dashboard');
     }
   } else {

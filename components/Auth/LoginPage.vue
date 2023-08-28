@@ -4,8 +4,6 @@ import { useAuthStore } from '@/store/useAuthStore';
 
 const auth = useAuthStore();
 
-console.log(auth.isLoading);
-
 const form = ref({
   email: '',
   password: '',
@@ -96,12 +94,14 @@ const handleLogin = async () => {
           >
             <div class="-mt-1 font-bod bg-white px-5 absolute">Or</div>
           </div>
-          <BaseButton
-            type="button"
-            class="px-8 xl:px-10 py-3 mt-2 bg-inherit text-gradient border border-[#0c66ee]"
-          >
-            Sign Up
-          </BaseButton>
+          <NuxtLink to="/signup">
+            <BaseButton
+              type="button"
+              class="px-8 w-full xl:px-10 py-3 mt-2 bg-inherit text-gradient border border-[#0c66ee]"
+            >
+              Sign Up
+            </BaseButton>
+          </NuxtLink>
         </div>
       </form>
     </div>

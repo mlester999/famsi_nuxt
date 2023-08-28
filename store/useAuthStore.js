@@ -60,5 +60,34 @@ export const useAuthStore = defineStore('auth', () => {
     return loginResponse;
   };
 
-  return { user, isLoading, login, logout, fetchUser };
+  const register = async (info) => {
+    isLoading.value = true;
+    await useApiFetch('/sanctum/csrf-cookie');
+
+    const registerResponse = await useApiFetch('/api/register', {
+      method: 'POST',
+      body: info,
+    });
+
+    if (registerResponse.data?.value?.token) {
+      const { data } = await useApiFetch('/api/user', {
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + registerResponse.data.value.token,
+        },
+      });
+
+      localStorage.setItem('Token', registerResponse.data.value.token);
+
+      user.value = data.value;
+
+      return navigateTo('/dashboard');
+    }
+
+    isLoading.value = false;
+
+    return registerResponse;
+  };
+
+  return { user, isLoading, login, logout, register, fetchUser };
 });
