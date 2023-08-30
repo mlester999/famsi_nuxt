@@ -6,5 +6,5 @@ definePageMeta({
 </script>
 
 <template>
-  <h1>This is Dashboard Page</h1>
+  <BaseImageCarousel id="imageCarousel" />
 </template>

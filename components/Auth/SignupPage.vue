@@ -221,7 +221,7 @@ const handleRegister = async () => {
             :class="[
               auth.isLoading
                 ? 'bg-gradient-to-r from-[#85a5ff] to-[#4b8dff] hover:shadow-none'
-                : 'bg-gradient-to-r from-[#468ef9] to-[#0c66ee]',
+                : 'bg-gradient-to-r from-[#468ef9] to-[#0c66ee] focus:ring-2',
             ]"
           >
             {{ auth.isLoading ? 'Loading...' : 'Register' }}
