@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { useApiFetch } from '~/composables/useApiFetch';
+import nuxtStorage from 'nuxt-storage';
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref(null);
@@ -8,11 +9,12 @@ export const useAuthStore = defineStore('auth', () => {
 
   const fetchUser = async () => {
     if (process.client) {
-      if (localStorage.getItem('Token')) {
+      if (nuxtStorage.localStorage.getData('Token')) {
         const { data } = await useApiFetch('/api/user', {
           headers: {
             Accept: 'application/json',
-            Authorization: 'Bearer ' + localStorage.getItem('Token'),
+            Authorization:
+              'Bearer ' + nuxtStorage.localStorage.getData('Token'),
           },
         });
 
@@ -25,7 +27,7 @@ export const useAuthStore = defineStore('auth', () => {
     isLoading.value = true;
     await useApiFetch('/logout', { method: 'POST' });
     user.value = null;
-    localStorage.setItem('Token', null);
+    nuxtStorage.localStorage.setData('Token', null);
 
     isLoading.value = false;
     navigateTo('/login');
@@ -48,7 +50,11 @@ export const useAuthStore = defineStore('auth', () => {
         },
       });
 
-      localStorage.setItem('Token', loginResponse.data.value.token);
+      nuxtStorage.localStorage.setData(
+        'Token',
+        loginResponse.data.value.token,
+        300
+      );
 
       user.value = data.value;
 
@@ -77,7 +83,11 @@ export const useAuthStore = defineStore('auth', () => {
         },
       });
 
-      localStorage.setItem('Token', registerResponse.data.value.token);
+      nuxtStorage.localStorage.setData(
+        'Token',
+        registerResponse.data.value.token,
+        300
+      );
 
       user.value = data.value;
 

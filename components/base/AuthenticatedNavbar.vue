@@ -6,10 +6,10 @@ const store = useAuthStore();
 
 const settingsModalVisibility = ref(false);
 
-onClickOutside(
-  settingsModalVisibility,
-  (event) => (settingsModalVisibility.value = false)
-);
+// onClickOutside(
+//   settingsModalVisibility,
+//   (event) => (settingsModalVisibility.value = false)
+// );
 
 const handleLogout = async () => {
   await store.logout();
