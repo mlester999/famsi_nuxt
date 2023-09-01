@@ -19,12 +19,10 @@ async function useTwElements() {
   const options = {
     selectFilter: props.canSearch ?? true,
     selectSize: 'lg',
-    selectClearButton: false,
+    selectClearButton: true,
   };
 
   const mySelect = new Select(document.getElementById(props.id), options);
-
-  twElements.default;
 }
 </script>
 

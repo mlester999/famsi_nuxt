@@ -1,10 +1,22 @@
 <script setup>
+import { ref } from 'vue';
 import { useAuthStore } from '@/store/useAuthStore';
 
 const store = useAuthStore();
 
+const settingsModalVisibility = ref(false);
+
+onClickOutside(
+  settingsModalVisibility,
+  (event) => (settingsModalVisibility.value = false)
+);
+
 const handleLogout = async () => {
   await store.logout();
+};
+
+const handleSettingsModal = () => {
+  settingsModalVisibility.value = !settingsModalVisibility.value;
 };
 </script>
 
@@ -14,27 +26,22 @@ const handleLogout = async () => {
   <section class="relative mx-auto">
     <!-- navbar -->
     <nav class="flex justify-between text-gray-600">
-      <div class="px-5 xl:px-12 py-6 flex w-full items-center">
-        <a class="text-3xl font-bold font-heading" href="/">
+      <div class="px-5 xl:px-12 py-2 flex w-full items-center">
+        <a class="text-3xl font-bold font-heading mr-auto" href="/dashboard">
           <img
             src="@/assets/img/logo/famsi_logo.png"
             class="w-24 xl:w-28"
             alt="FAMSI Logo"
           />
         </a>
-        <!-- Nav Links -->
-        <ul
-          class="hidden md:flex px-4 mx-auto font-normal font-heading space-x-12"
-        >
-          <li><a class="hover:text-gray-800" href="#">Home</a></li>
-          <li><a class="hover:text-gray-800" href="#">Catagory</a></li>
-          <li><a class="hover:text-gray-800" href="#">Collections</a></li>
-          <li><a class="hover:text-gray-800" href="#">Contact Us</a></li>
-        </ul>
         <!-- Header Icons -->
-        <div class="hidden xl:flex items-center space-x-5 items-center">
+        <div class="hidden relative xl:flex space-x-5 items-center">
           <!-- Sign In / Register      -->
-          <a class="flex items-center hover:text-gray-800" href="#">
+          <button
+            @click="handleSettingsModal"
+            class="flex items-center hover:text-gray-800"
+            href="#"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-6 w-6 hover:text-gray-800"
@@ -49,11 +56,39 @@ const handleLogout = async () => {
                 d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-          </a>
+          </button>
+
+          <div
+            v-if="settingsModalVisibility"
+            class="absolute right-0 w-48 z-50 py-1 bg-white rounded-md shadow-lg top-8 ring-1 ring-black ring-opacity-5 dark:bg-dark focus:outline-none"
+            tabindex="-1"
+            role="menu"
+            aria-orientation="vertical"
+            aria-label="User menu"
+          >
+            <button
+              class="block px-4 w-full py-2 text-sm text-gray-700 text-left transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-blue-600"
+            >
+              Your Profile
+            </button>
+            <button
+              class="block px-4 w-full py-2 text-sm text-gray-700 text-left transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-blue-600"
+            >
+              Settings
+            </button>
+            <form @submit.prevent="handleLogout">
+              <button
+                type="submit"
+                class="block px-4 w-full py-2 text-sm text-red-600 text-left transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-blue-600"
+              >
+                Logout
+              </button>
+            </form>
+          </div>
         </div>
       </div>
       <!-- Responsive navbar -->
-      <a class="xl:hidden flex mr-6 items-center" href="#">
+      <a class="xl:hidden flex mr-6 items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-6 w-6 hover:text-gray-800"

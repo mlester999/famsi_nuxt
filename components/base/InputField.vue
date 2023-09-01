@@ -19,8 +19,6 @@ async function useTwElements() {
   const { Input } = await import('tw-elements');
 
   const myInput = new Input(document.getElementById(props.id));
-
-  twElements.default;
 }
 </script>
 

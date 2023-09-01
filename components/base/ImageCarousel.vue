@@ -63,15 +63,26 @@ onMounted(async () => {
         style="backface-visibility: hidden"
       >
         <img
-          src="https://tecdn.b-cdn.net/img/Photos/Slides/img%20(15).jpg"
+          src="@/assets/img/famsi_pipol1.jpg"
           class="block w-full h-96 object-cover"
           alt="..."
         />
+        <div class="absolute inset-0 bg-black opacity-50"></div>
         <div
-          class="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-white md:block"
+          class="absolute inset-x-[15%] bottom-32 hidden py-5 space-y-2 text-center text-white md:block"
         >
-          <h5 class="text-xl">First slide label</h5>
-          <p>Some representative placeholder content for the first slide.</p>
+          <h1
+            class="text-4xl font-bold"
+            style="text-shadow: 4px 4px 2px rgba(0, 0, 0, 0.6)"
+          >
+            Welcome to Fully Advanced Manpower Solutions, Inc.
+          </h1>
+          <h3
+            class="text-2xl"
+            style="text-shadow: 4px 4px 2px rgba(0, 0, 0, 0.6)"
+          >
+            Apply Now: Your Path to a Rewarding Career
+          </h3>
         </div>
       </div>
       <!--Second item-->
