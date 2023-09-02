@@ -5,5 +5,7 @@ definePageMeta({
 </script>
 
 <template>
+  <NuxtLoadingIndicator />
+
   <AuthSignupPage />
 </template>

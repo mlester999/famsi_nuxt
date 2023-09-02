@@ -1,13 +1,17 @@
 <template>
-  <div class="min-h-screen font-sans antialiased relative">
-    <div class="relative">
-      <BaseAuthenticatedNavbar />
+  <client-only>
+    <BaseLoadingIndicator />
 
-      <main class="text-neutral-800">
-        <slot />
-      </main>
+    <div class="min-h-screen font-sans antialiased relative">
+      <div class="relative">
+        <BaseAuthenticatedNavbar />
+
+        <main class="text-neutral-800">
+          <slot />
+        </main>
+      </div>
     </div>
-  </div>
+  </client-only>
 </template>
 <script>
 export default {

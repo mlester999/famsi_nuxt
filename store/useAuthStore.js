@@ -4,21 +4,23 @@ import nuxtStorage from 'nuxt-storage';
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref(null);
-
   const isLoading = ref(false);
 
   const fetchUser = async () => {
-    if (process.client) {
-      if (nuxtStorage.localStorage.getData('Token')) {
+    const token = nuxtStorage.localStorage.getData('Token');
+
+    if (token) {
+      try {
         const { data } = await useApiFetch('/api/user', {
           headers: {
             Accept: 'application/json',
-            Authorization:
-              'Bearer ' + nuxtStorage.localStorage.getData('Token'),
+            Authorization: 'Bearer ' + token,
           },
         });
 
         user.value = data.value;
+      } catch (error) {
+        console.error('Error fetching user data:', error);
       }
     }
   };
