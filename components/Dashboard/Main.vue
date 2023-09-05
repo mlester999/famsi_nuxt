@@ -41,7 +41,7 @@ const filter = useFilterJobStore();
   </div>
 
   <div
-    class="flex px-8 mx-auto max-w-6xl justify-center items-center space-x-8"
+    class="flex py-8 mx-auto max-w-6xl justify-center items-center space-x-8"
   >
     <BaseCardJob />
   </div>
