@@ -2,7 +2,7 @@
   <client-only>
     <BaseLoadingIndicator />
 
-    <div class="min-h-screen font-sans antialiased relative">
+    <div class="min-h-screen font-sans antialiased relative bg-gray-100">
       <div class="relative">
         <BaseAuthenticatedNavbar />
 

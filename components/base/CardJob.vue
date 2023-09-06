@@ -1,72 +1,89 @@
-<template>
-  <div class="bg-indigo-600 text-white rounded shadow-xl py-5 px-5">
-    <div class="flex flex-wrap -mx-3 items-center">
-      <div class="w-full sm:w-1/2 md:w-2/3 px-3 text-left">
-        <div class="p-5 xl:px-8 md:py-5">
-          <h3 class="text-2xl">Electrical Engineer (SMT Technician)</h3>
+<script setup>
+const props = defineProps({
+  details: Object,
+});
 
-          <p class="text-sm text-indigo-200">
-            You will have the opportunity to work on exciting and innovative
-            projects and at the same time maintain a work-life balance
-            lifestyle. If you are searching for something amazing that you can
-            be integral part of, this could be perfect career move for you.
+const date = new Date(props.details.created_at);
+const year = date.getFullYear();
+const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+const day = String(date.getDate()).padStart(2, '0');
+
+const formattedDate = `${year}-${month}-${day}`;
+</script>
+
+<template>
+  <div class="bg-white text-white shadow-xl py-5 px-5">
+    <div class="flex flex-wrap -mx-3">
+      <div class="w-full sm:w-1/2 md:w-2/3 px-3 text-left">
+        <div class="p-5 xl:px-0 md:py-5 space-y-2">
+          <h3 class="text-2xl font-semibold text-blue-500">
+            {{ details.title }}
+          </h3>
+
+          <p class="text-sm text-black leading-relaxed">
+            {{ details.description }}
           </p>
         </div>
       </div>
       <div class="w-full sm:w-1/2 md:w-1/3 text-center">
         <div
-          class="p-5 xl:px-4 md:py-5 bg-gray-200 text-gray-700 flex flex-wrap items-center"
+          class="p-5 xl:px-4 md:py-5 bg-gray-100 text-gray-700 flex flex-wrap items-center"
         >
-          <div class="w-full text-left text-md font-semibold">
-            <div class="flex items-center">
-              <div class="md:w-1/2">
+          <div class="w-full text-left text-md">
+            <div class="flex items-center border-t-2 border-gray-200">
+              <div class="md:w-1/2 font-semibold">
                 <p class="py-2">Location:</p>
               </div>
 
               <div class="w-full">
-                <p class="p-2">Science Park 1 Diezmo Cabuyao Laguna</p>
+                <p class="px-4 py-2">{{ details.location }}</p>
               </div>
             </div>
 
-            <div class="flex items-center">
-              <div class="md:w-1/2">
+            <div class="flex items-center border-t-2 border-gray-200">
+              <div class="md:w-1/2 font-semibold">
                 <p class="py-2">Job Type:</p>
               </div>
 
               <div class="w-full">
-                <p class="p-2">Permanent</p>
+                <p class="px-4 py-2">{{ details.job_type }}</p>
               </div>
             </div>
 
-            <div class="flex items-center">
-              <div class="md:w-1/2">
+            <div class="flex items-center border-t-2 border-gray-200">
+              <div class="md:w-1/2 font-semibold">
                 <p class="py-2">Employee Type:</p>
               </div>
 
               <div class="w-full">
-                <p class="p-2">Full-time</p>
+                <p class="px-4 py-2">{{ details.employment_type }}</p>
               </div>
             </div>
 
-            <div class="flex items-center">
-              <div class="md:w-1/2">
+            <div class="flex items-center border-t-2 border-gray-200">
+              <div class="md:w-1/2 font-semibold">
                 <p class="py-2">Job Published:</p>
               </div>
 
               <div class="w-full">
-                <p class="p-2">2023-09-05</p>
+                <p class="px-4 py-2">{{ formattedDate }}</p>
               </div>
             </div>
 
-            <div class="flex items-center">
-              <div class="md:w-1/2">
+            <div class="flex items-center border-t-2 border-gray-200">
+              <div class="md:w-1/2 font-semibold">
                 <p class="py-2">Job ID:</p>
               </div>
 
               <div class="w-full">
-                <p class="p-2">33109</p>
+                <p class="px-4 py-2">{{ details.id }}</p>
               </div>
             </div>
+            <button
+              class="bg-blue-400 hover:bg-blue-500 transition duration-150 text-white px-4 py-3 w-full mt-2"
+            >
+              Read More
+            </button>
           </div>
         </div>
       </div>

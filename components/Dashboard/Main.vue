@@ -1,7 +1,8 @@
 <script setup>
-import { useFilterJobStore } from '@/store/useFilterJobStore';
+import { onBeforeMount } from 'vue';
+import { useMainDashboardStore } from '@/store/useMainDashboardStore';
 
-const filter = useFilterJobStore();
+const dashboard = useMainDashboardStore();
 </script>
 
 <template>
@@ -10,7 +11,7 @@ const filter = useFilterJobStore();
   <div class="flex p-8 mx-auto max-w-6xl justify-center items-center space-x-8">
     <BaseSearchBar
       id="searchJob"
-      v-model="filter.search"
+      v-model="dashboard.search"
       label="search"
       placeholder="Search for Job Title..."
     />
@@ -18,7 +19,7 @@ const filter = useFilterJobStore();
     <div class="w-full">
       <BaseSelectInput
         id="jobLocation"
-        v-model="filter.location"
+        v-model="dashboard.location"
         label="Location"
         placeholder="Location"
       >
@@ -41,8 +42,13 @@ const filter = useFilterJobStore();
   </div>
 
   <div
-    class="flex py-8 mx-auto max-w-6xl justify-center items-center space-x-8"
+    class="flex flex-col py-8 mx-auto max-w-6xl justify-center items-center space-y-0.5"
   >
-    <BaseCardJob />
+    <template
+      v-for="jobPosition in dashboard.jobPositionDetails"
+      :key="jobPosition.id"
+    >
+      <BaseCardJob :details="jobPosition" />
+    </template>
   </div>
 </template>
