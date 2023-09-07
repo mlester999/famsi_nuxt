@@ -9,6 +9,13 @@ const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-indexe
 const day = String(date.getDate()).padStart(2, '0');
 
 const formattedDate = `${year}-${month}-${day}`;
+
+const slug = props.details.title
+  .toLowerCase()
+  .replaceAll(' ', '-')
+  .replaceAll('.', '')
+  .replaceAll('/', '-');
+const readMore = `/portal/job/${props.details.id}/${slug}`;
 </script>
 
 <template>
@@ -16,9 +23,13 @@ const formattedDate = `${year}-${month}-${day}`;
     <div class="flex flex-wrap -mx-3">
       <div class="w-full sm:w-1/2 md:w-2/3 px-3 text-left">
         <div class="p-5 xl:px-0 md:py-5 space-y-2">
-          <h3 class="text-2xl font-semibold text-blue-500">
-            {{ details.title }}
-          </h3>
+          <NuxtLink to="/">
+            <h3
+              class="text-2xl font-semibold text-blue-500 hover:text-blue-600 hover:text-underline"
+            >
+              {{ details.title }}
+            </h3>
+          </NuxtLink>
 
           <p class="text-sm text-black leading-relaxed">
             {{ details.description }}
@@ -79,11 +90,14 @@ const formattedDate = `${year}-${month}-${day}`;
                 <p class="px-4 py-2">{{ details.id }}</p>
               </div>
             </div>
-            <button
-              class="bg-blue-400 hover:bg-blue-500 transition duration-150 text-white px-4 py-3 w-full mt-2"
-            >
-              Read More
-            </button>
+
+            <NuxtLink :to="readMore">
+              <button
+                class="bg-blue-400 hover:bg-blue-500 transition duration-150 text-white px-4 py-3 w-full mt-2"
+              >
+                Read More
+              </button>
+            </NuxtLink>
           </div>
         </div>
       </div>

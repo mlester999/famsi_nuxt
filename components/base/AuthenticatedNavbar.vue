@@ -27,7 +27,7 @@ const handleSettingsModal = () => {
     <!-- navbar -->
     <nav class="flex justify-between text-gray-600">
       <div class="px-5 xl:px-12 py-2 flex w-full items-center">
-        <a class="text-3xl font-bold font-heading mr-auto" href="/dashboard">
+        <a class="text-3xl font-bold font-heading mr-auto" href="/portal">
           <img
             src="@/assets/img/logo/famsi_logo.png"
             class="w-24 xl:w-28"

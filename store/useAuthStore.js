@@ -60,7 +60,7 @@ export const useAuthStore = defineStore('auth', () => {
 
       user.value = data.value;
 
-      return navigateTo('/dashboard');
+      return navigateTo('/portal');
     }
 
     isLoading.value = false;
@@ -93,7 +93,7 @@ export const useAuthStore = defineStore('auth', () => {
 
       user.value = data.value;
 
-      return navigateTo('/dashboard');
+      return navigateTo('/portal');
     }
 
     isLoading.value = false;

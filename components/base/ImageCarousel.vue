@@ -57,19 +57,19 @@ onMounted(async () => {
     >
       <!--First item-->
       <div
-        class="relative float-left h-96 -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+        class="relative float-left h-64 -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
         data-te-carousel-active
         data-te-carousel-item
         style="backface-visibility: hidden"
       >
         <img
           src="@/assets/img/famsi_pipol1.jpg"
-          class="block w-full h-96 object-cover"
+          class="block w-full h-64 object-cover"
           alt="..."
         />
         <div class="absolute inset-0 bg-black opacity-50"></div>
         <div
-          class="absolute inset-x-[15%] bottom-32 hidden py-5 space-y-2 text-center text-white md:block"
+          class="absolute inset-x-[15%] bottom-16 hidden py-5 space-y-2 text-center text-white md:block"
         >
           <h1
             class="text-4xl font-bold"
@@ -87,38 +87,60 @@ onMounted(async () => {
       </div>
       <!--Second item-->
       <div
-        class="relative float-left h-96 -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+        class="relative float-left h-64 -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
         data-te-carousel-item
         style="backface-visibility: hidden"
       >
         <img
-          src="https://tecdn.b-cdn.net/img/Photos/Slides/img%20(22).jpg"
-          class="block w-full h-96 object-cover"
+          src="@/assets/img/famsi_pipol2.jpg"
+          class="block w-full h-64 object-cover"
           alt="..."
         />
+        <div class="absolute inset-0 bg-black opacity-50"></div>
         <div
-          class="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-white md:block"
+          class="absolute inset-x-[15%] bottom-16 hidden py-5 space-y-2 text-center text-white md:block"
         >
-          <h5 class="text-xl">Second slide label</h5>
-          <p>Some representative placeholder content for the second slide.</p>
+          <h1
+            class="text-4xl font-bold"
+            style="text-shadow: 4px 4px 2px rgba(0, 0, 0, 0.6)"
+          >
+            Unlock Opportunities, Seize Success
+          </h1>
+          <h3
+            class="text-2xl"
+            style="text-shadow: 4px 4px 2px rgba(0, 0, 0, 0.6)"
+          >
+            and Write Your Own Inspiring Story.
+          </h3>
         </div>
       </div>
       <!--Third item-->
       <div
-        class="relative float-left h-96 -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+        class="relative float-left h-64 -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
         data-te-carousel-item
         style="backface-visibility: hidden"
       >
         <img
-          src="https://tecdn.b-cdn.net/img/Photos/Slides/img%20(23).jpg"
-          class="block w-full h-96 object-cover"
+          src="@/assets/img/famsi_pipol3.jpeg"
+          class="block w-full h-64 object-cover"
           alt="..."
         />
+        <div class="absolute inset-0 bg-black opacity-50"></div>
         <div
-          class="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-white md:block"
+          class="absolute inset-x-[15%] bottom-16 hidden py-5 space-y-2 text-center text-white md:block"
         >
-          <h5 class="text-xl">Third slide label</h5>
-          <p>Some representative placeholder content for the third slide.</p>
+          <h1
+            class="text-4xl font-bold"
+            style="text-shadow: 4px 4px 2px rgba(0, 0, 0, 0.6)"
+          >
+            Join us on this exciting expedition
+          </h1>
+          <h3
+            class="text-2xl"
+            style="text-shadow: 4px 4px 2px rgba(0, 0, 0, 0.6)"
+          >
+            towards a brighter tomorrow!
+          </h3>
         </div>
       </div>
     </div>
