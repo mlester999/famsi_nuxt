@@ -13,11 +13,6 @@
     </div>
   </client-only>
 </template>
-<script>
-export default {
-  name: 'IsLoggedInLayout',
-};
-</script>
 
 <style>
 .cover-gradient {

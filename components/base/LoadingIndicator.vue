@@ -1,10 +1,15 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onBeforeMount } from 'vue';
 
 const showLoadingSpinner = ref(true);
 
+onBeforeMount(() => {
+  document.body.classList.add('overflow-hidden');
+});
+
 setTimeout(() => {
   showLoadingSpinner.value = false;
+  document.body.classList.remove('overflow-hidden');
 }, 2000);
 </script>
 
@@ -17,7 +22,7 @@ setTimeout(() => {
     leave-from-class="opacity-100"
     leave-to-class="opacity-0"
   >
-    <div v-if="showLoadingSpinner" class="absolute z-50 h-full w-full bg-white">
+    <div v-if="showLoadingSpinner" class="fixed z-50 h-full w-full bg-white">
       <div class="flex items-center justify-center h-screen">
         <div
           class="inline-block h-8 w-8 animate-[spinner-grow_0.75s_linear_infinite] rounded-full bg-current align-[-0.125em] text-primary opacity-0 motion-reduce:animate-[spinner-grow_1.5s_linear_infinite]"

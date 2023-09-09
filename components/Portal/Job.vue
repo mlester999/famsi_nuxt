@@ -10,6 +10,9 @@ const portal = useMainPortalStore();
   <div
     class="flex flex-col py-8 mx-auto max-w-6xl justify-center items-center space-y-0.5"
   >
-    <BaseCardJobDetails :details="portal.jobPositionDetails" />
+    <BaseCardJobDetails
+      :details="portal.jobPositionDetails"
+      :relatedJobs="portal.relatedJobsDetails"
+    />
   </div>
 </template>

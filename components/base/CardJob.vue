@@ -3,6 +3,8 @@ const props = defineProps({
   details: Object,
 });
 
+console.log(props.details);
+
 const date = new Date(props.details.created_at);
 const year = date.getFullYear();
 const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
@@ -57,7 +59,7 @@ const readMore = `/portal/job/${props.details.id}/${slug}`;
               </div>
 
               <div class="w-full">
-                <p class="px-4 py-2">{{ details.job_type }}</p>
+                <p class="px-4 py-2">{{ details.job_type.title }}</p>
               </div>
             </div>
 
@@ -67,7 +69,7 @@ const readMore = `/portal/job/${props.details.id}/${slug}`;
               </div>
 
               <div class="w-full">
-                <p class="px-4 py-2">{{ details.employment_type }}</p>
+                <p class="px-4 py-2">{{ details.employee_type.title }}</p>
               </div>
             </div>
 

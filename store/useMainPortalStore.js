@@ -6,6 +6,7 @@ export const useMainPortalStore = defineStore('filter', () => {
   const location = ref(null);
   const allJobPositions = ref(null);
   const jobPositionDetails = ref(null);
+  const relatedJobsDetails = ref(null);
   const isLoading = ref(false);
 
   const getAllJobPositions = async () => {
@@ -28,15 +29,25 @@ export const useMainPortalStore = defineStore('filter', () => {
 
     if (token) {
       try {
-        const { data } = await useFetch(
+        const { data: jobPositionData } = await useFetch(
           `http://localhost:8000/api/job-positions/details/${id}/${slug}`
         );
 
-        console.log(data.value);
-        if (data.value) {
-          jobPositionDetails.value = data.value;
+        const { data: relatedJobsData } = await useFetch(
+          `http://localhost:8000/api/job-positions/related-jobs/${id}`
+        );
+
+        if (jobPositionData.value) {
+          jobPositionDetails.value = jobPositionData.value;
         } else {
           jobPositionDetails.value = false;
+        }
+        console.log(relatedJobsData.value);
+
+        if (relatedJobsData.value) {
+          relatedJobsDetails.value = relatedJobsData.value;
+        } else {
+          relatedJobsDetails.value = false;
         }
       } catch (error) {
         console.error('Error fetching user data:', error);
@@ -49,6 +60,7 @@ export const useMainPortalStore = defineStore('filter', () => {
     location,
     allJobPositions,
     jobPositionDetails,
+    relatedJobsDetails,
     isLoading,
     getAllJobPositions,
     getJobPositionDetails,
