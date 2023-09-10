@@ -179,7 +179,7 @@ const relatedJobLink = (id, title) => {
             </div>
 
             <div class="flex items-center space-x-2">
-              <p class="font-bold">Working Hours:</p>
+              <p class="font-bold">Schedule:</p>
               <p>{{ details.schedule }}</p>
             </div>
           </div>
@@ -263,11 +263,15 @@ const relatedJobLink = (id, title) => {
             >
               <div class="flex items-center my-2">
                 <div class="w-full">
-                  <a
-                    :href="relatedJobLink(relatedJob.id, relatedJob.title)"
-                    class="text-lg text-blue-500 hover:underline hover:text-blue-600"
-                    >{{ relatedJob.title }}</a
+                  <NuxtLink
+                    :to="relatedJobLink(relatedJob.id, relatedJob.title)"
                   >
+                    <p
+                      class="text-lg text-blue-500 hover:underline hover:text-blue-600"
+                    >
+                      {{ relatedJob.title }}
+                    </p>
+                  </NuxtLink>
                 </div>
               </div>
 

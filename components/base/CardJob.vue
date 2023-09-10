@@ -1,9 +1,8 @@
 <script setup>
 const props = defineProps({
   details: Object,
+  isLoading: Boolean,
 });
-
-console.log(props.details);
 
 const date = new Date(props.details.created_at);
 const year = date.getFullYear();
@@ -25,7 +24,7 @@ const readMore = `/portal/job/${props.details.id}/${slug}`;
     <div class="flex flex-wrap -mx-3">
       <div class="w-full sm:w-1/2 md:w-2/3 px-3 text-left">
         <div class="p-5 xl:px-0 md:py-5 space-y-2">
-          <NuxtLink to="/">
+          <NuxtLink :to="readMore">
             <h3
               class="text-2xl font-semibold text-blue-500 hover:text-blue-600 hover:text-underline"
             >

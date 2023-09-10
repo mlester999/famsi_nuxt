@@ -23,7 +23,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         return navigateTo('/portal');
       }
     } else {
-      if (to.path === '/portal') {
+      if (to.path.includes('/portal')) {
         return navigateTo('/login');
       }
     }
