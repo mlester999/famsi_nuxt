@@ -1,7 +1,32 @@
 <script setup>
 import { useMainPortalStore } from '@/store/useMainPortalStore';
+import { useLandingPageStore } from '@/store/useLandingPageStore';
+import { ref, watch } from 'vue';
 
 const portal = useMainPortalStore();
+const landingPage = useLandingPageStore();
+
+const showAdvancedFilters = ref(false);
+const selectedJobType = ref(null);
+const selectedEmploymentType = ref(null);
+let employmentTypesList = ref(null);
+
+const toggleAdvancedFilters = () => {
+  showAdvancedFilters.value = !showAdvancedFilters.value;
+};
+
+watch(
+  () => selectedJobType.value,
+  (value) => {
+    if (value) {
+      employmentTypesList.value = landingPage.employmentTypes.filter(
+        (val, index) => val.job_type_id == value
+      );
+    } else {
+      employmentTypesList.value = landingPage.employmentTypes;
+    }
+  }
+);
 </script>
 
 <template>
@@ -25,22 +50,85 @@ const portal = useMainPortalStore();
         placeholder="Location"
       >
         <option value="" disabled selected hidden></option>
+
         <option value="All Location" selected>All Location</option>
-        <option value="Science Park 1 Diezmo Cabuyao Laguna">
-          Science Park 1 Diezmo Cabuyao Laguna
+        <option
+          v-for="companyAssignment in landingPage.companyAssignments"
+          :key="companyAssignment.id"
+          :value="companyAssignment.title"
+        >
+          {{ companyAssignment.title }}
         </option>
-        <option value="Science Park 2 Real Calamba Laguna">
-          Science Park 2 Real Calamba Laguna
-        </option>
-        <option value="Laguna Technopark Biñan Laguna">
-          Laguna Technopark Biñan Laguna
-        </option>
-        <option value="Gen. Trias Cavite">Gen. Trias Cavite</option>
-        <option value="LIMA Batangas">LIMA Batangas</option>
       </BaseSelectInput>
     </div>
 
-    <BaseAdvancedButton id="advancedBtn">Advanced</BaseAdvancedButton>
+    <BaseAdvancedButton @click="toggleAdvancedFilters" id="advancedBtn"
+      >Advanced</BaseAdvancedButton
+    >
+  </div>
+
+  <div
+    v-if="showAdvancedFilters"
+    class="flex mx-auto max-w-6xl justify-center items-center space-x-8"
+  >
+    <div class="w-full bg-white">
+      <BaseSelectInput
+        id="jobType"
+        v-model="selectedJobType"
+        label="Job Type"
+        :canSearch="false"
+      >
+        <option value="" disabled selected hidden></option>
+
+        <option
+          v-for="jobType in landingPage.jobTypes"
+          :key="jobType.id"
+          :value="jobType.id"
+        >
+          {{ jobType.title }}
+        </option>
+      </BaseSelectInput>
+    </div>
+
+    <div class="w-full bg-white">
+      <BaseSelectInput
+        id="employmentType"
+        v-model="selectedEmploymentType"
+        label="Employment Type"
+        :canSearch="false"
+        :disabled="!Boolean(employmentTypesList)"
+      >
+        <option value="" disabled selected hidden></option>
+
+        <option
+          v-for="employeeType in employmentTypesList"
+          :key="employeeType.id"
+          :value="employeeType.id"
+        >
+          {{ employeeType.title }}
+        </option>
+      </BaseSelectInput>
+    </div>
+
+    <div class="w-full bg-white">
+      <BaseSelectInput
+        id="industry"
+        v-model="portal.filter.location"
+        label="Location"
+        placeholder="Location"
+      >
+        <option value="" disabled selected hidden></option>
+
+        <option value="All Location" selected>All Location</option>
+        <option
+          v-for="companyAssignment in landingPage.companyAssignments"
+          :key="companyAssignment.id"
+          :value="companyAssignment.title"
+        >
+          {{ companyAssignment.title }}
+        </option>
+      </BaseSelectInput>
+    </div>
   </div>
 
   <div

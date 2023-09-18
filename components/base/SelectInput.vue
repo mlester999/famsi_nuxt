@@ -7,6 +7,7 @@ const props = defineProps({
   label: String,
   errors: String,
   canSearch: Boolean,
+  disabled: Boolean,
 });
 
 onMounted(async () => {
@@ -17,6 +18,7 @@ async function useTwElements() {
   const { Select } = await import('tw-elements');
 
   const options = {
+    disabled: props.disabled,
     selectFilter: props.canSearch ?? true,
     selectSize: 'lg',
     selectClearButton: true,

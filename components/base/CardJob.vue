@@ -1,7 +1,6 @@
 <script setup>
 const props = defineProps({
   details: Object,
-  isLoading: Boolean,
 });
 
 const date = new Date(props.details.created_at);
