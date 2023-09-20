@@ -30,13 +30,14 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     } else {
       if (to.path.includes('/portal')) {
         return navigateTo('/login');
-      } else {
+      }
+
+      if (to.path === '/') {
         await landingPage.fetchQualifications();
         await landingPage.fetchBenefits();
         await landingPage.fetchCompanyAssignments();
         await landingPage.fetchJobTypes();
         await landingPage.fetchEmploymentTypes();
-        return navigateTo('/');
       }
     }
   }

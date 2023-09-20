@@ -20,7 +20,7 @@
               >
                 <td class="py-4 whitespace-nowrap">
                   <div class="flex items-center space-x-2">
-                    <p class="text-center">{{ data.id }}. {{ data.name }}</p>
+                    <p class="text-center">{{ data.id }}. {{ data.title }}</p>
                   </div>
                 </td>
               </tr>

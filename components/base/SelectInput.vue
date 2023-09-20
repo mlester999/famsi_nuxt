@@ -21,7 +21,7 @@ async function useTwElements() {
     disabled: props.disabled,
     selectFilter: props.canSearch ?? true,
     selectSize: 'lg',
-    selectClearButton: true,
+    selectClearButton: false,
   };
 
   const mySelect = new Select(document.getElementById(props.id), options);

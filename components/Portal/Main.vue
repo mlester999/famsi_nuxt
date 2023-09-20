@@ -117,8 +117,6 @@ watch(
         label="Location"
         placeholder="Location"
       >
-        <option value="" disabled selected hidden></option>
-
         <option value="All Location" selected>All Location</option>
         <option
           v-for="companyAssignment in landingPage.companyAssignments"

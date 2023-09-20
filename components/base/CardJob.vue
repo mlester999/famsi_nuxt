@@ -19,17 +19,16 @@ const readMore = `/portal/job/${props.details.id}/${slug}`;
 </script>
 
 <template>
-  <div class="bg-white text-white shadow-xl py-5 px-5">
+  <div class="bg-white text-white shadow-xl py-5 px-5 w-full">
     <div class="flex flex-wrap -mx-3">
-      <div class="w-full sm:w-1/2 md:w-2/3 px-3 text-left">
+      <div class="w-full sm:w-1/2 md:w-2/3 px-3 text-left flex-grow-1">
         <div class="p-5 xl:px-0 md:py-5 space-y-2">
-          <NuxtLink :to="readMore">
-            <h3
-              class="text-2xl font-semibold text-blue-500 hover:text-blue-600 hover:text-underline"
-            >
-              {{ details.title }}
-            </h3>
-          </NuxtLink>
+          <a
+            :href="readMore"
+            class="w-max text-2xl font-semibold text-blue-500 hover:text-blue-600 hover:text-underline"
+          >
+            {{ details.title }}
+          </a>
 
           <p class="text-sm text-black leading-relaxed">
             {{ details.description }}

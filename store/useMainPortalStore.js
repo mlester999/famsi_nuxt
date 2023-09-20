@@ -7,7 +7,7 @@ export const useMainPortalStore = defineStore('filter', () => {
 
   const filter = reactive({
     search: route.query?.search,
-    location: route.query?.location,
+    location: route.query?.location || 'All Location',
   });
   const allJobPositions = ref(null);
   const jobPositionDetails = ref(null);
@@ -16,6 +16,7 @@ export const useMainPortalStore = defineStore('filter', () => {
 
   watch(filter, (value) => {
     isLoading.value = true;
+
     if (value.search && value.location) {
       if (value.location.includes('All')) {
         router.push({
@@ -49,7 +50,6 @@ export const useMainPortalStore = defineStore('filter', () => {
 
   const getAllJobPositions = async () => {
     const token = nuxtStorage.localStorage.getData('Token');
-
     if (token) {
       try {
         const { data } = await useFetch(
