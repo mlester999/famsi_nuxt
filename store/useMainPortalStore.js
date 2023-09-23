@@ -122,7 +122,7 @@ export const useMainPortalStore = defineStore('filter', () => {
             filter.job_type.includes('All')) &&
           (!filter.employment_type ||
             employmentType === filter.employment_type ||
-            !filter.employment_type.includes('All')) &&
+            filter.employment_type.includes('All')) &&
           (!filter.industry ||
             industry === filter.industry ||
             filter.industry.includes('All'))

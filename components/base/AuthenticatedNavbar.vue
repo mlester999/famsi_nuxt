@@ -6,10 +6,10 @@ const store = useAuthStore();
 
 const settingsModalVisibility = ref(false);
 
-// onClickOutside(
-//   settingsModalVisibility,
-//   (event) => (settingsModalVisibility.value = false)
-// );
+onClickOutside(
+  settingsModalVisibility,
+  (event) => (settingsModalVisibility.value = false)
+);
 
 const handleLogout = async () => {
   await store.logout();
@@ -59,27 +59,27 @@ const handleSettingsModal = () => {
           </button>
 
           <div
-            v-if="settingsModalVisibility"
-            class="absolute right-0 w-48 z-50 py-1 bg-white rounded-md shadow-lg top-8 ring-1 ring-black ring-opacity-5 dark:bg-dark focus:outline-none"
+            v-show="settingsModalVisibility"
+            class="absolute right-0 w-48 z-50 bg-white rounded-md shadow-lg top-8 ring-1 ring-black ring-opacity-5 dark:bg-dark focus:outline-none"
             tabindex="-1"
             role="menu"
             aria-orientation="vertical"
             aria-label="User menu"
           >
             <button
-              class="block px-4 w-full py-2 text-sm text-gray-700 text-left transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-blue-600"
+              class="block px-4 w-full py-3 text-sm text-gray-700 text-left transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-blue-600"
             >
               Your Profile
             </button>
             <button
-              class="block px-4 w-full py-2 text-sm text-gray-700 text-left transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-blue-600"
+              class="block px-4 w-full py-3 text-sm text-gray-700 text-left transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-blue-600"
             >
               Settings
             </button>
             <form @submit.prevent="handleLogout">
               <button
                 type="submit"
-                class="block px-4 w-full py-2 text-sm text-red-600 text-left transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-blue-600"
+                class="block px-4 rounded-md w-full py-3 text-sm text-red-600 text-left transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-blue-600"
               >
                 Logout
               </button>

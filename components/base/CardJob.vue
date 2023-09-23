@@ -19,8 +19,8 @@ const readMore = `/portal/job/${props.details.id}/${slug}`;
 </script>
 
 <template>
-  <div class="bg-white text-white shadow-xl py-5 px-5 w-full">
-    <div class="flex flex-wrap -mx-3">
+  <div class="bg-white text-white shadow-xl w-full">
+    <div class="flex flex-wrap -mx-3 py-5 px-5">
       <div class="w-full sm:w-1/2 md:w-2/3 px-3 text-left flex-grow-1">
         <div class="p-5 xl:px-0 md:py-5 space-y-2">
           <a
