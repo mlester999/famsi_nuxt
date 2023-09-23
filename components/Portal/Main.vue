@@ -7,26 +7,10 @@ const portal = useMainPortalStore();
 const landingPage = useLandingPageStore();
 
 const showAdvancedFilters = ref(false);
-const selectedJobType = ref(null);
-const selectedEmploymentType = ref(null);
-let employmentTypesList = ref(null);
 
 const toggleAdvancedFilters = () => {
   showAdvancedFilters.value = !showAdvancedFilters.value;
 };
-
-watch(
-  () => selectedJobType.value,
-  (value) => {
-    if (value) {
-      employmentTypesList.value = landingPage.employmentTypes.filter(
-        (val, index) => val.job_type_id == value
-      );
-    } else {
-      employmentTypesList.value = landingPage.employmentTypes;
-    }
-  }
-);
 </script>
 
 <template>
@@ -51,7 +35,7 @@ watch(
       >
         <option value="" disabled selected hidden></option>
 
-        <option value="All Location" selected>All Location</option>
+        <option value="All Location" selected>All Locations</option>
         <option
           v-for="companyAssignment in landingPage.companyAssignments"
           :key="companyAssignment.id"
@@ -74,16 +58,17 @@ watch(
     <div class="w-full bg-white">
       <BaseSelectInput
         id="jobType"
-        v-model="selectedJobType"
+        v-model="portal.filter.job_type"
         label="Job Type"
         :canSearch="false"
       >
         <option value="" disabled selected hidden></option>
 
+        <option value="All Job Types" selected>All Job Types</option>
         <option
           v-for="jobType in landingPage.jobTypes"
-          :key="jobType.id"
-          :value="jobType.id"
+          :key="jobType.title"
+          :value="jobType.title"
         >
           {{ jobType.title }}
         </option>
@@ -93,17 +78,19 @@ watch(
     <div class="w-full bg-white">
       <BaseSelectInput
         id="employmentType"
-        v-model="selectedEmploymentType"
+        v-model="portal.filter.employment_type"
         label="Employment Type"
         :canSearch="false"
-        :disabled="!Boolean(employmentTypesList)"
       >
         <option value="" disabled selected hidden></option>
 
+        <option value="All Employment Types" selected>
+          All Employment Types
+        </option>
         <option
-          v-for="employeeType in employmentTypesList"
-          :key="employeeType.id"
-          :value="employeeType.id"
+          v-for="employeeType in landingPage.employmentTypes"
+          :key="employeeType.title"
+          :value="employeeType.title"
         >
           {{ employeeType.title }}
         </option>
@@ -113,17 +100,19 @@ watch(
     <div class="w-full bg-white">
       <BaseSelectInput
         id="industry"
-        v-model="portal.filter.location"
-        label="Location"
-        placeholder="Location"
+        v-model="portal.filter.industry"
+        label="Industry"
+        placeholder="Industry"
       >
-        <option value="All Location" selected>All Location</option>
+        <option value="" disabled selected hidden></option>
+
+        <option value="All Industries" selected>All Industries</option>
         <option
-          v-for="companyAssignment in landingPage.companyAssignments"
-          :key="companyAssignment.id"
-          :value="companyAssignment.title"
+          v-for="industry in landingPage.industries"
+          :key="industry.id"
+          :value="industry.title"
         >
-          {{ companyAssignment.title }}
+          {{ industry.title }}
         </option>
       </BaseSelectInput>
     </div>

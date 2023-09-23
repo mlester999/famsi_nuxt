@@ -15,6 +15,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         await landingPage.fetchCompanyAssignments();
         await landingPage.fetchJobTypes();
         await landingPage.fetchEmploymentTypes();
+        await landingPage.fetchIndustries();
         await portal.getAllJobPositions();
       }
 

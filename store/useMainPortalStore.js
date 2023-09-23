@@ -5,9 +5,20 @@ export const useMainPortalStore = defineStore('filter', () => {
   const route = useRoute();
   const router = useRouter();
 
+  const oldFilter = reactive({
+    search: undefined,
+    location: undefined,
+    job_type: undefined,
+    employment_type: undefined,
+    industry: undefined,
+  });
+
   const filter = reactive({
     search: route.query?.search,
-    location: route.query?.location || 'All Location',
+    location: route.query?.location,
+    job_type: route.query?.jobType,
+    employment_type: route.query?.employmentType,
+    industry: route.query?.industry,
   });
   const allJobPositions = ref(null);
   const jobPositionDetails = ref(null);
@@ -17,88 +28,111 @@ export const useMainPortalStore = defineStore('filter', () => {
   watch(filter, (value) => {
     isLoading.value = true;
 
-    if (value.search && value.location) {
-      if (value.location.includes('All')) {
-        router.push({
-          path: '/portal',
-          query: { search: value.search },
-        });
-      } else {
-        router.push({
-          path: '/portal',
-          query: { search: value.search, location: value.location },
-        });
-      }
-    } else if (value.search) {
-      router.push({
-        path: '/portal',
-        query: { search: value.search },
-      });
-    } else if (value.location) {
-      if (value.location.includes('All')) {
-        router.replace({ path: '/portal' });
-      } else {
-        router.push({
-          path: '/portal',
-          query: { location: value.location },
-        });
-      }
+    if (!value.location?.includes('All')) {
+      oldFilter.location = value.location;
     } else {
-      router.replace({ path: '/portal' });
+      if (!Boolean(oldFilter.location) && value.location?.includes('All')) {
+        oldFilter.location = value.location;
+        isLoading.value = false;
+        return; // No need to continue if route didn't change
+      }
     }
+
+    if (!value.job_type?.includes('All')) {
+      oldFilter.job_type = value.job_type;
+    } else {
+      if (!Boolean(oldFilter.job_type) && value.job_type?.includes('All')) {
+        oldFilter.job_type = value.job_type;
+        isLoading.value = false;
+        return; // No need to continue if route didn't change
+      }
+    }
+
+    if (!value.employment_type?.includes('All')) {
+      oldFilter.employment_type = value.employment_type;
+    } else {
+      if (
+        !Boolean(oldFilter.employment_type) &&
+        value.employment_type?.includes('All')
+      ) {
+        oldFilter.employment_type = value.employment_type;
+        isLoading.value = false;
+        return; // No need to continue if route didn't change
+      }
+    }
+
+    if (!value.industry?.includes('All')) {
+      oldFilter.industry = value.industry;
+    } else {
+      if (!Boolean(oldFilter.industry) && value.industry?.includes('All')) {
+        oldFilter.industry = value.industry;
+        isLoading.value = false;
+        return; // No need to continue if route didn't change
+      }
+    }
+
+    // Helper function to generate the query object
+    const generateQuery = (value) => {
+      const query = {};
+
+      if (value.search) query.search = value.search;
+      if (value.location && !value.location.includes('All'))
+        query.location = value.location;
+      if (value.job_type && !value.job_type.includes('All'))
+        query.jobType = value.job_type;
+      if (value.employment_type && !value.employment_type.includes('All'))
+        query.employmentType = value.employment_type;
+      if (value.industry && !value.industry.includes('All'))
+        query.industry = value.industry;
+
+      return query;
+    };
+
+    const query = generateQuery(value);
+
+    router.push({ query });
   });
 
   const getAllJobPositions = async () => {
     const token = nuxtStorage.localStorage.getData('Token');
-    if (token) {
-      try {
-        const { data } = await useFetch(
-          'http://localhost:8000/api/job-positions/details'
-        );
-        if (filter.search && filter.location) {
-          if (filter.location.includes('All')) {
-            allJobPositions.value = data.value.filter((el, i) => {
-              return (
-                el.title.toLowerCase().includes(filter.search.toLowerCase()) ||
-                el.description
-                  .toLowerCase()
-                  .includes(filter.search.toLowerCase())
-              );
-            });
-          } else {
-            allJobPositions.value = data.value.filter((el, i) => {
-              return (
-                (el.title.toLowerCase().includes(filter.search.toLowerCase()) ||
-                  el.description
-                    .toLowerCase()
-                    .includes(filter.search.toLowerCase())) &&
-                el.location === filter.location
-              );
-            });
-          }
-        } else if (filter.search) {
-          allJobPositions.value = data.value.filter((el, i) => {
-            return (
-              el.title.toLowerCase().includes(filter.search.toLowerCase()) ||
-              el.description.toLowerCase().includes(filter.search.toLowerCase())
-            );
-          });
-        } else if (filter.location) {
-          if (filter.location.includes('All')) {
-            allJobPositions.value = data.value;
-          } else {
-            allJobPositions.value = data.value.filter((el, i) => {
-              return el.location === filter.location;
-            });
-          }
-        } else {
-          allJobPositions.value = data.value;
-        }
+    if (!token) return;
 
-        isLoading.value = false;
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      }
+    try {
+      const { data } = await useFetch(
+        'http://localhost:8000/api/job-positions/details'
+      );
+
+      const filteredData = data.value.filter((el) => {
+        const title = el.title.toLowerCase();
+        const description = el.description.toLowerCase();
+        const location = el.location;
+        const jobType = el.job_type.title.replaceAll('+', ' ');
+        const employmentType = el.employee_type.title.replaceAll('+', ' ');
+        const industry = el.industry.title;
+
+        return (
+          (!filter.search ||
+            title.includes(filter.search.toLowerCase()) ||
+            description.includes(filter.search.toLowerCase())) &&
+          (!filter.location ||
+            location === filter.location ||
+            filter.location.includes('All')) &&
+          (!filter.job_type ||
+            jobType === filter.job_type ||
+            filter.job_type.includes('All')) &&
+          (!filter.employment_type ||
+            employmentType === filter.employment_type ||
+            !filter.employment_type.includes('All')) &&
+          (!filter.industry ||
+            industry === filter.industry ||
+            filter.industry.includes('All'))
+        );
+      });
+
+      allJobPositions.value = filteredData;
+      isLoading.value = false;
+    } catch (error) {
+      console.error('Error fetching user data:', error);
     }
   };
 

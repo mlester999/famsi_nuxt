@@ -15,6 +15,7 @@ export const useLandingPageStore = defineStore('landingPage', () => {
   const companyAssignments = ref(null);
   const jobTypes = ref(null);
   const employmentTypes = ref(null);
+  const industries = ref(null);
 
   const shortIntroduction = reactive({
     title: 'We at Fully Advanced Manpower Solutions, Inc.',
@@ -76,7 +77,7 @@ export const useLandingPageStore = defineStore('landingPage', () => {
         qualifications.value = data.value;
       }
     } catch (error) {
-      console.error('Error fetching user data:', error);
+      console.error('Error fetching qualifications data:', error);
     }
   };
 
@@ -88,7 +89,7 @@ export const useLandingPageStore = defineStore('landingPage', () => {
         benefits.value = data.value;
       }
     } catch (error) {
-      console.error('Error fetching user data:', error);
+      console.error('Error fetching benefits data:', error);
     }
   };
 
@@ -102,7 +103,7 @@ export const useLandingPageStore = defineStore('landingPage', () => {
         companyAssignments.value = data.value;
       }
     } catch (error) {
-      console.error('Error fetching user data:', error);
+      console.error('Error fetching company assignments data:', error);
     }
   };
 
@@ -114,7 +115,7 @@ export const useLandingPageStore = defineStore('landingPage', () => {
         jobTypes.value = data.value;
       }
     } catch (error) {
-      console.error('Error fetching user data:', error);
+      console.error('Error fetching job types data:', error);
     }
   };
 
@@ -128,7 +129,19 @@ export const useLandingPageStore = defineStore('landingPage', () => {
         employmentTypes.value = data.value;
       }
     } catch (error) {
-      console.error('Error fetching user data:', error);
+      console.error('Error fetching employment types data:', error);
+    }
+  };
+
+  const fetchIndustries = async () => {
+    try {
+      const { data } = await useFetch('http://localhost:8000/api/industries');
+
+      if (data) {
+        industries.value = data.value;
+      }
+    } catch (error) {
+      console.error('Error fetching industries data:', error);
     }
   };
 
@@ -142,10 +155,12 @@ export const useLandingPageStore = defineStore('landingPage', () => {
     currentOpenings,
     jobTypes,
     employmentTypes,
+    industries,
     fetchQualifications,
     fetchBenefits,
     fetchCompanyAssignments,
     fetchJobTypes,
     fetchEmploymentTypes,
+    fetchIndustries,
   };
 });

@@ -62,7 +62,7 @@ const readMore = `/portal/job/${props.details.id}/${slug}`;
 
             <div class="flex items-center border-t-2 border-gray-200">
               <div class="md:w-1/2 font-semibold">
-                <p class="py-2">Employee Type:</p>
+                <p class="py-2">Employment Type:</p>
               </div>
 
               <div class="w-full">
@@ -90,13 +90,13 @@ const readMore = `/portal/job/${props.details.id}/${slug}`;
               </div>
             </div>
 
-            <NuxtLink :to="readMore">
+            <a :href="readMore">
               <button
                 class="bg-blue-400 hover:bg-blue-500 transition duration-150 text-white px-4 py-3 w-full mt-2"
               >
                 Read More
               </button>
-            </NuxtLink>
+            </a>
           </div>
         </div>
       </div>
