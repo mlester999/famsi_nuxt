@@ -20,7 +20,7 @@ export default {
     <LandingVisitOffice />
 
     <!-- Getting started section -->
-    <LandingCurrentOpenings />
+    <!-- <LandingCurrentOpenings /> -->
 
     <!-- FAQ section -->
     <section class="w-full my-24">
