@@ -6,7 +6,7 @@ const portal = useMainPortalStore();
 
 <template>
   <Head>
-    <Title>FAMSI | Job | {{ portal.jobPositionDetails.title }}</Title>
+    <Title>FAMSI | Applying for {{ portal.jobPositionDetails.title }}</Title>
     <Meta name="description" />
   </Head>
 
@@ -15,7 +15,7 @@ const portal = useMainPortalStore();
   <div
     class="flex flex-col py-8 mx-auto max-w-7xl justify-center items-center space-y-0.5"
   >
-    <BaseCardJobDetails
+    <BaseCardJobApplication
       :details="portal.jobPositionDetails"
       :relatedJobs="portal.relatedJobsDetails"
     />

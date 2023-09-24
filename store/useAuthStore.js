@@ -101,5 +101,35 @@ export const useAuthStore = defineStore('auth', () => {
     return registerResponse;
   };
 
-  return { user, isLoading, login, logout, register, fetchUser };
+  const application = async (val) => {
+    isLoading.value = true;
+
+    const formData = new FormData();
+    formData.append('resume_path', val.resume_path);
+    formData.append('applicant_id', val.applicant_id);
+
+    try {
+      const { data, error } = await useFetch(
+        'http://localhost:8000/api/application',
+        {
+          method: 'POST',
+          body: formData,
+        }
+      );
+
+      if (data) {
+        console.log(data);
+        // return navigateTo('/portal');
+      }
+
+      isLoading.value = false;
+
+      return error;
+    } catch (error) {
+      isLoading.value = false;
+      return error;
+    }
+  };
+
+  return { user, isLoading, login, logout, register, application, fetchUser };
 });

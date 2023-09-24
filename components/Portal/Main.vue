@@ -126,7 +126,16 @@ const toggleAdvancedFilters = () => {
   </Transition>
 
   <div
-    v-if="portal.filter.search && !portal.isLoading"
+    v-if="
+      portal.filter.search ||
+      (portal.filter.location && !portal.filter.location.includes('All')) ||
+      (portal.filter.job_type && !portal.filter.job_type.includes('All')) ||
+      (portal.filter.employment_type &&
+        !portal.filter.employment_type.includes('All')) ||
+      (portal.filter.industry &&
+        !portal.filter.industry.includes('All') &&
+        !portal.isLoading)
+    "
     class="flex mx-auto max-w-6xl justify-center items-center space-x-8"
   >
     <div class="w-full border-gray-300 space-y-1">
@@ -236,7 +245,7 @@ const toggleAdvancedFilters = () => {
 
     <template v-else>
       <div
-        class="text-gray-600 font-semibold py-3 px-5 w-full bg-white border-gray-300"
+        class="text-gray-600 border-b-2 font-semibold py-3 px-5 w-full bg-white border-gray-300"
       >
         <h1
           v-if="

@@ -6,8 +6,8 @@ definePageMeta({
 
 <template>
   <Head>
-    <Title>FAMSI | Portal</Title>
-    <Meta name="description" content="FAMSI | Portal" />
+    <Title>FAMSI | Job Portal</Title>
+    <Meta name="description" content="FAMSI | Job Portal" />
   </Head>
 
   <PortalMain />

@@ -18,7 +18,6 @@ const slug = props.details.title
   .replaceAll(' ', '-')
   .replaceAll('.', '')
   .replaceAll('/', '-');
-
 const readMore = `/portal/job/${props.details.id}/${slug}`;
 
 const route = useRoute();
@@ -48,11 +47,7 @@ const portalUrl = computed(() => {
 });
 
 const filterIndustryUrl = computed(() => {
-  return `${portalUrl}?industry=${props.details.industry.title}`;
-});
-
-const applyNowUrl = computed(() => {
-  return `${localhostUrl}/portal/apply/${props.details.id}/${slug}`;
+  return `http://localhost:3000/portal?industry=${props.details.industry.title}`;
 });
 
 const relatedJobLink = (id, title) => {
@@ -196,155 +191,7 @@ const relatedJobLink = (id, title) => {
       </div>
       <div class="w-full sm:w-1/2 md:w-1/3 px-3 text-center space-y-6">
         <div class="w-full text-left text-md">
-          <NuxtLink :to="applyNowUrl">
-            <button
-              class="bg-blue-500 uppercase rounded-md hover:bg-blue-600 transition duration-150 text-white px-4 py-6 w-full"
-            >
-              Apply Now
-            </button>
-          </NuxtLink>
-        </div>
-
-        <div
-          class="bg-white shadow-xl text-gray-700 flex flex-wrap items-center"
-        >
-          <div class="w-full text-left text-md">
-            <div class="flex items-center border-gray-200">
-              <div class="w-full text-center">
-                <p class="p-4 uppercase text-xl font-semibold text-blue-500">
-                  Share this job
-                </p>
-              </div>
-            </div>
-
-            <div class="flex items-center border-t-2 border-gray-200">
-              <div
-                class="w-full font-semibold p-4 flex space-x-2 justify-around"
-              >
-                <a :href="facebookUrl" target="_blank" rel="noreferrer">
-                  <img
-                    class="w-12 xl:w-18"
-                    src="@/assets/social-media/facebook.png"
-                  />
-                </a>
-
-                <a :href="twitterUrl" target="_blank" rel="noreferrer">
-                  <img
-                    class="w-12 xl:w-18"
-                    src="@/assets/social-media/twitter.png"
-                  />
-                </a>
-
-                <a :href="linkedinUrl" target="_blank" rel="noreferrer">
-                  <img
-                    class="w-12 xl:w-18"
-                    src="@/assets/social-media/linkedin.png"
-                  />
-                </a>
-
-                <a :href="emailUrl" target="_blank" rel="noreferrer">
-                  <img
-                    class="w-12 xl:w-18"
-                    src="@/assets/social-media/email.png"
-                  />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          v-if="relatedJobs"
-          class="bg-white shadow-xl text-gray-700 flex flex-wrap items-center"
-        >
-          <div class="w-full text-left">
-            <div class="w-full text-center">
-              <p
-                class="p-4 uppercase text-xl bg-gray-500 font-semibold text-white"
-              >
-                Similar Jobs
-              </p>
-            </div>
-            <div
-              v-for="relatedJob in relatedJobs"
-              :key="relatedJob.id"
-              class="p-5 xl:px-4 md:pb-5 md:pt-2 border-b-2 border-gray-300"
-            >
-              <div class="flex items-center my-2">
-                <div class="w-full">
-                  <NuxtLink
-                    :to="relatedJobLink(relatedJob.id, relatedJob.title)"
-                  >
-                    <p
-                      class="text-lg text-blue-500 hover:underline hover:text-blue-600"
-                    >
-                      {{ relatedJob.title }}
-                    </p>
-                  </NuxtLink>
-                </div>
-              </div>
-
-              <div class="text-sm flex items-center">
-                <div class="md:w-1/2 font-semibold">
-                  <p class="py-2">Location:</p>
-                </div>
-
-                <div class="w-full">
-                  <p class="px-4 py-2">{{ relatedJob.location }}</p>
-                </div>
-              </div>
-
-              <div class="text-sm flex items-center">
-                <div class="md:w-1/2 font-semibold">
-                  <p class="py-2">Job Type:</p>
-                </div>
-
-                <div class="w-full">
-                  <p class="px-4 py-2">{{ relatedJob.job_type.title }}</p>
-                </div>
-              </div>
-
-              <div class="text-sm flex items-center">
-                <div class="md:w-1/2 font-semibold">
-                  <p class="py-2">Employee Type:</p>
-                </div>
-
-                <div class="w-full">
-                  <p class="px-4 py-2">{{ relatedJob.employee_type.title }}</p>
-                </div>
-              </div>
-
-              <div class="text-sm flex items-center">
-                <div class="md:w-1/2 font-semibold">
-                  <p class="py-2">Job Published:</p>
-                </div>
-
-                <div class="w-full">
-                  <p class="px-4 py-2">
-                    {{ new Date(relatedJob.created_at).getFullYear() }}-{{
-                      String(
-                        new Date(relatedJob.created_at).getMonth() + 1
-                      ).padStart(2, '0')
-                    }}-{{
-                      String(
-                        new Date(relatedJob.created_at).getDate()
-                      ).padStart(2, '0')
-                    }}
-                  </p>
-                </div>
-              </div>
-
-              <div class="text-sm flex items-center">
-                <div class="md:w-1/2 font-semibold">
-                  <p class="py-2">Job ID:</p>
-                </div>
-
-                <div class="w-full">
-                  <p class="px-4 py-2">{{ relatedJob.id }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <BaseApplicationForm />
         </div>
       </div>
     </div>

@@ -25,6 +25,14 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
           to.params.slug[1]
         );
       }
+
+      if (to.path.includes('/portal/apply')) {
+        await portal.getJobPositionDetails(
+          to.params.slug[0],
+          to.params.slug[1]
+        );
+      }
+
       if (to.path === '/' || to.path === '/login' || to.path === '/signup') {
         return navigateTo('/portal');
       }

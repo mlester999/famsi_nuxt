@@ -5,5 +5,5 @@ definePageMeta({
 </script>
 
 <template>
-  <PortalJob />
+  <PortalApply />
 </template>
