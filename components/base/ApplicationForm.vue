@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive } from 'vue';
+import { ref, reactive, computed } from 'vue';
 import { useAuthStore } from '@/store/useAuthStore';
 
 const auth = useAuthStore();
@@ -25,6 +25,12 @@ const errors = reactive({
   last_name: '',
   email: '',
   contact_number: '',
+});
+
+const checkApplications = computed(() => {
+  return auth.user.applicant.applications.find(
+    (el) => el.status === 1 || el.status === 2
+  );
 });
 
 const applyJob = async () => {
@@ -151,6 +157,14 @@ const applyJob = async () => {
 
         <div class="flex flex-col space-y-5 w-full">
           <BaseButton
+            v-if="!checkApplications"
+            disabled
+            class="px-8 xl:px-10 py-3 mt-2 text-white bg-gray-600 hover:shadow-none"
+          >
+            You've already applied for a job
+          </BaseButton>
+          <BaseButton
+            v-else
             type="submit"
             :disabled="auth.isLoading"
             class="px-8 xl:px-10 py-3 mt-2 text-white"

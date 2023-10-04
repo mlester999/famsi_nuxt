@@ -296,7 +296,10 @@ const toggleAdvancedFilters = () => {
           .reverse()"
         :key="jobApplication.job_position.id"
       >
-        <BaseCardJob :details="jobApplication.job_position" />
+        <BaseCardMyJobApplications
+          :details="jobApplication.job_position"
+          :status="jobApplication.status"
+        />
       </template>
     </template>
   </div>
