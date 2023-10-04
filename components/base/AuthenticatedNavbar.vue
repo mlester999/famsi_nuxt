@@ -66,15 +66,17 @@ const handleSettingsModal = () => {
             aria-orientation="vertical"
             aria-label="User menu"
           >
+            <NuxtLink to="/portal/my-applications">
+              <button
+                class="block px-4 w-full py-3 text-sm text-gray-700 text-left transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-blue-600"
+              >
+                My Applications
+              </button>
+            </NuxtLink>
             <button
               class="block px-4 w-full py-3 text-sm text-gray-700 text-left transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-blue-600"
             >
-              Your Profile
-            </button>
-            <button
-              class="block px-4 w-full py-3 text-sm text-gray-700 text-left transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-blue-600"
-            >
-              Settings
+              My Profile
             </button>
             <form @submit.prevent="handleLogout">
               <button

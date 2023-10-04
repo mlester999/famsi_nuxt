@@ -107,6 +107,7 @@ export const useAuthStore = defineStore('auth', () => {
     const formData = new FormData();
     formData.append('resume_path', val.resume_path);
     formData.append('applicant_id', val.applicant_id);
+    formData.append('job_position_id', val.job_position_id);
 
     try {
       const { data, error } = await useFetch(
@@ -118,11 +119,10 @@ export const useAuthStore = defineStore('auth', () => {
       );
 
       if (data) {
-        console.log(data);
-        // return navigateTo('/portal');
-      }
+        isLoading.value = false;
 
-      isLoading.value = false;
+        return navigateTo('/portal');
+      }
 
       return error;
     } catch (error) {

@@ -1,11 +1,13 @@
 import { useAuthStore } from '@/store/useAuthStore';
 import { useMainPortalStore } from '@/store/useMainPortalStore';
+import { useMyApplicationsStore } from '@/store/useMyApplicationsStore';
 import { useLandingPageStore } from '@/store/useLandingPageStore';
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
   if (process.client) {
     const store = useAuthStore();
     const portal = useMainPortalStore();
+    const applications = useMyApplicationsStore();
     const landingPage = useLandingPageStore();
 
     await store.fetchUser();
@@ -17,6 +19,14 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         await landingPage.fetchEmploymentTypes();
         await landingPage.fetchIndustries();
         await portal.getAllJobPositions();
+      }
+
+      if (to.path === '/portal/my-applications') {
+        await landingPage.fetchCompanyAssignments();
+        await landingPage.fetchJobTypes();
+        await landingPage.fetchEmploymentTypes();
+        await landingPage.fetchIndustries();
+        await applications.getAllJobApplications(store.user.applicant.id);
       }
 
       if (to.path.includes('/portal/job')) {

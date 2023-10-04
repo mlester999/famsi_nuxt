@@ -3,6 +3,7 @@ import { ref, reactive } from 'vue';
 import { useAuthStore } from '@/store/useAuthStore';
 
 const auth = useAuthStore();
+const router = useRoute();
 
 const details = ref({
   first_name: auth.user.applicant?.first_name || '',
@@ -15,6 +16,7 @@ const details = ref({
 const form = ref({
   resume_path: null,
   applicant_id: auth.user.applicant?.id || null,
+  job_position_id: router.params.slug[0],
 });
 
 const errors = reactive({
