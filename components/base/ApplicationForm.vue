@@ -27,11 +27,19 @@ const errors = reactive({
   contact_number: '',
 });
 
-const checkApplications = computed(() => {
+const isAppliedAlready = computed(() => {
   return auth.user.applicant.applications.find(
-    (el) => el.status === 1 || el.status === 2
+    (el) => el.job_position_id == parseInt(router.params.slug[0])
   );
 });
+
+const checkApplications = computed(() => {
+  return auth.user.applicant.applications.find(
+    (el) => el.status === 1 || el.status === 2 || el.status === 3
+  );
+});
+
+console.log(checkApplications);
 
 const applyJob = async () => {
   if (
@@ -157,7 +165,14 @@ const applyJob = async () => {
 
         <div class="flex flex-col space-y-5 w-full">
           <BaseButton
-            v-if="!checkApplications"
+            v-if="isAppliedAlready"
+            disabled
+            class="px-8 xl:px-10 py-3 mt-2 text-white bg-gray-600 hover:shadow-none"
+          >
+            You've already applied to this job
+          </BaseButton>
+          <BaseButton
+            v-else-if="checkApplications"
             disabled
             class="px-8 xl:px-10 py-3 mt-2 text-white bg-gray-600 hover:shadow-none"
           >
