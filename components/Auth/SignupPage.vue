@@ -116,7 +116,7 @@ const handleRegister = async () => {
               id="firstName"
               v-model="form.firstName"
               type="text"
-              label="First Name"
+              label="First Name *"
               placeholder="First Name"
               :errors="errors?.firstName"
             />
@@ -142,7 +142,7 @@ const handleRegister = async () => {
               id="lastName"
               v-model="form.lastName"
               type="lastName"
-              label="Last Name"
+              label="Last Name *"
               placeholder="Last Name"
               :errors="errors?.lastName"
             />
@@ -155,7 +155,7 @@ const handleRegister = async () => {
               id="email"
               v-model="form.email"
               type="email"
-              label="Email Address"
+              label="Email Address *"
               placeholder="Email Address"
               :errors="errors?.email"
             />
@@ -167,7 +167,7 @@ const handleRegister = async () => {
             <BaseSelectInput
               id="gender"
               v-model="form.gender"
-              label="Gender"
+              label="Gender *"
               placeholder="Gender"
               :errors="errors?.gender"
             >
@@ -182,7 +182,7 @@ const handleRegister = async () => {
               id="contact_number"
               v-model="form.contact_number"
               type="contact_number"
-              label="Contact Number"
+              label="Contact Number *"
               placeholder="Contact Number"
               :errors="errors?.contact_number"
             />
@@ -195,7 +195,7 @@ const handleRegister = async () => {
               id="password"
               v-model="form.password"
               type="password"
-              label="Password"
+              label="Password *"
               placeholder="Password"
               :errors="errors?.password"
             />
@@ -206,7 +206,7 @@ const handleRegister = async () => {
               id="password_confirmation"
               v-model="form.password_confirmation"
               type="password"
-              label="Confirm Password"
+              label="Confirm Password *"
               placeholder="Confirm Password"
               :errors="errors?.password_confirmation"
             />

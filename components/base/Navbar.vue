@@ -33,11 +33,13 @@
             Login
           </base-button>
         </NuxtLink>
+        <NuxtLink to="/signup">
         <base-button
           class="px-8 xl:px-10 py-3 mt-2 bg-gradient-to-r from-[#468ef9] to-[#0c66ee] text-white"
         >
           Sign Up
         </base-button>
+      </NuxtLink>
       </div>
     </div>
   </nav>

@@ -16,6 +16,7 @@ export const useLandingPageStore = defineStore('landingPage', () => {
   const jobTypes = ref(null);
   const employmentTypes = ref(null);
   const industries = ref(null);
+  const jobPositions = ref(null);
 
   const shortIntroduction = reactive({
     title: 'We at Fully Advanced Manpower Solutions, Inc.',
@@ -145,6 +146,18 @@ export const useLandingPageStore = defineStore('landingPage', () => {
     }
   };
 
+  const fetchJobPositions = async () => {
+    try {
+      const { data } = await useFetch('http://localhost:8000/api/job-positions/details');
+
+      if (data) {
+        jobPositions.value = data.value;
+      }
+    } catch (error) {
+      console.error('Error fetching job positions data:', error);
+    }
+  };
+
   return {
     welcome,
     qualifications,
@@ -156,11 +169,13 @@ export const useLandingPageStore = defineStore('landingPage', () => {
     jobTypes,
     employmentTypes,
     industries,
+    jobPositions,
     fetchQualifications,
     fetchBenefits,
     fetchCompanyAssignments,
     fetchJobTypes,
     fetchEmploymentTypes,
     fetchIndustries,
+    fetchJobPositions
   };
 });

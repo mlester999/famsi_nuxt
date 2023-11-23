@@ -18,6 +18,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         await landingPage.fetchJobTypes();
         await landingPage.fetchEmploymentTypes();
         await landingPage.fetchIndustries();
+        await landingPage.fetchJobPositions();
         await portal.getAllJobPositions();
       }
 
@@ -26,6 +27,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         await landingPage.fetchJobTypes();
         await landingPage.fetchEmploymentTypes();
         await landingPage.fetchIndustries();
+        await landingPage.fetchJobPositions();
         await applications.getAllJobApplications(store.user.applicant.id);
       }
 
@@ -57,6 +59,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         await landingPage.fetchCompanyAssignments();
         await landingPage.fetchJobTypes();
         await landingPage.fetchEmploymentTypes();
+        await landingPage.fetchJobPositions();
       }
     }
   }

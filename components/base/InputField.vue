@@ -9,6 +9,7 @@ const props = defineProps({
   placeholder: String,
   disabled: Boolean,
   errors: String,
+  success: String,
 });
 
 onMounted(async () => {
@@ -67,5 +68,8 @@ async function useTwElements() {
   </div>
   <p class="text-red-500 text-sm absolute -mt-2" v-if="errors">
     {{ errors }}
+  </p>
+  <p class="text-green-500 text-sm absolute -mt-2" v-if="success">
+    {{ success }}
   </p>
 </template>

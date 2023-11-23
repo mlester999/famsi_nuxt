@@ -3,7 +3,7 @@ import { useLandingPageStore } from '@/store/useLandingPageStore';
 import { storeToRefs } from 'pinia';
 
 const store = useLandingPageStore();
-const { currentOpenings } = storeToRefs(store);
+const { currentOpenings, jobPositions } = storeToRefs(store);
 </script>
 
 <template>
@@ -13,15 +13,15 @@ const { currentOpenings } = storeToRefs(store);
     <div class="w-full py-16 flex flex-col items-center">
       <h2
         data-aos="flip-down"
-        class="text-3xl sm:text-4xl font-semibold text-center"
+        class="text-3xl sm:text-4xl font-semibold text-center mb-8"
       >
         {{ currentOpenings.title }}
       </h2>
       <div
         data-aos="fade-up"
-        class="relative w-full flex flex-col lg:flex-row items-center justify-between space-y-12 lg:space-y-0 px-4 xl:px-10 mt-16 sm:mt-8"
+        class="grid grid-cols-3 w-full px-4 xl:px-10"
       >
-        <LandingPositions :positions="currentOpenings.positions" />
+        <LandingPositions :positions="jobPositions"  />
       </div>
     </div>
   </section>

@@ -73,7 +73,7 @@ const changeDetails = async () => {
               id="first_name"
               v-model="form.first_name"
               type="text"
-              label="First Name"
+              label="First Name *"
               placeholder="First Name"
               :errors="errors.first_name"
             />
@@ -94,7 +94,7 @@ const changeDetails = async () => {
               id="last_name"
               v-model="form.last_name"
               type="text"
-              label="Last Name"
+              label="Last Name *"
               placeholder="Last Name"
               :errors="errors.last_name"
             />
@@ -107,7 +107,7 @@ const changeDetails = async () => {
               id="email"
               v-model="form.email"
               type="text"
-              label="Email Address"
+              label="Email Address *"
               placeholder="Email Address"
               :errors="errors.email"
             />
@@ -118,7 +118,7 @@ const changeDetails = async () => {
               id="contact_number"
               v-model="form.contact_number"
               type="text"
-              label="Contact Number"
+              label="Contact Number *"
               placeholder="Contact Number"
               :errors="errors.contact_number"
             />

@@ -57,7 +57,7 @@ const changePassword = async () => {
               id="password"
               v-model="form.password"
               type="password"
-              label="Password"
+              label="Password *"
               placeholder="Password"
               :errors="errors.password"
             />
@@ -68,7 +68,7 @@ const changePassword = async () => {
               id="confirm_password"
               v-model="form.confirm_password"
               type="password"
-              label="Confirm Password"
+              label="Confirm Password *"
               placeholder="Confirm Password"
               :errors="errors.confirm_password"
             />

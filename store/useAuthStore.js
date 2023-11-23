@@ -44,6 +44,10 @@ export const useAuthStore = defineStore('auth', () => {
       body: credentials,
     });
 
+    if (loginResponse.error?.value?.data?.error === 'You need to verify your email first.') {
+      return navigateTo('/verify-email');
+    }
+
     if (loginResponse.data?.value?.token) {
       const { data } = await useApiFetch('/api/user', {
         headers: {
@@ -67,6 +71,41 @@ export const useAuthStore = defineStore('auth', () => {
 
     return loginResponse;
   };
+
+  const verifyEmail = async (credentials) => {
+    isLoading.value = true;
+    await useApiFetch('/sanctum/csrf-cookie');
+
+    const verifyEmailResponse = await useApiFetch('/api/verify-email', {
+      method: 'POST',
+      body: credentials,
+    });
+
+    isLoading.value = false;
+
+    return verifyEmailResponse;
+  };
+
+  const checkEmailVerification = async (credentials) => {
+    isLoading.value = true;
+    await useApiFetch('/sanctum/csrf-cookie');
+
+    const verifyEmailResponse = await useApiFetch('/api/check-email-verification', {
+      method: 'POST',
+      body: credentials,
+    });
+
+    if(verifyEmailResponse?.error?.value?.data?.message === "Email verification link has expired.") {
+      nuxtStorage.localStorage.setData('verification-message', "Email verification link has expired.");
+      
+      return navigateTo('/portal');
+    }
+
+    isLoading.value = false;
+
+    return verifyEmailResponse;
+  };
+
 
   const register = async (info) => {
     isLoading.value = true;
@@ -131,5 +170,5 @@ export const useAuthStore = defineStore('auth', () => {
     }
   };
 
-  return { user, isLoading, login, logout, register, application, fetchUser };
+  return { user, isLoading, login, verifyEmail, checkEmailVerification, logout, register, application, fetchUser };
 });

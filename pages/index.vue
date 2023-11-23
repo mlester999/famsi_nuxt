@@ -16,11 +16,11 @@ export default {
     <!-- Introduction section -->
     <LandingShortIntroduction />
 
-    <!-- Visit office section -->
-    <LandingVisitOffice />
-
     <!-- Getting started section -->
-    <!-- <LandingCurrentOpenings /> -->
+    <LandingCurrentOpenings />
+
+        <!-- Visit office section -->
+        <LandingVisitOffice />
 
   </div>
 </template>
